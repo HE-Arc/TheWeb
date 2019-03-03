@@ -1,4 +1,4 @@
-package com.hearc.biloni;
+package com.hearc.theweb;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
