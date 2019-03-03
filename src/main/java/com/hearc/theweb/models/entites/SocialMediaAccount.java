@@ -2,6 +2,8 @@ package com.hearc.theweb.models.entites;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +16,7 @@ public class SocialMediaAccount {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@OneToOne
+	@Enumerated(EnumType.STRING)
 	private SocialMedia socialMedia;
 
 	@OneToOne
