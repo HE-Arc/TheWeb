@@ -1,4 +1,4 @@
-package com.hearc.theweb.models;
+package com.hearc.theweb.models.entites;
 
 import java.util.Date;
 

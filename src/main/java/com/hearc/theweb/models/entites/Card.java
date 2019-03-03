@@ -1,4 +1,4 @@
-package com.hearc.theweb.models;
+package com.hearc.theweb.models.entites;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
