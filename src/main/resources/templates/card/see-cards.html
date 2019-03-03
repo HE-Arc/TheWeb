@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+	<head th:replace="fragments/base :: header">
+	</head>
+	
+	<body>
+  		<div th:replace="fragments/base :: nav">[Navigation]</div>
+  		
+  		<div class="container">
+  			<div class="row">
+  				<div class="col-9">
+  					 <div th:each="card : ${cards}" th:replace="card/single-card :: single-card(card)">
+  					 	[Card]
+  					 </div>
+  				</div>
+  				<div class="col-3">
+  				
+  				</div>
+  			</div>
+  			<ul>
+	  			<li th:each="card : ${cards}" th:text="${card}"></li>
+	  		</ul>
+  		</div>
+   		
+    		
+    	<div th:replace="fragments/base :: footer">[Footer]</div>
+	</body>
+
+</html>

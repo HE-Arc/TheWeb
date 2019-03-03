@@ -2,7 +2,6 @@ package com.hearc.theweb.models.entites;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,16 +15,9 @@ public class Person {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column
 	private String name;
-
-	@Column
 	private String firstname;
-
-	@Column
 	private Date birthdate;
-	
-	@Column
 	private String localisation;
 
 	// Constructors
@@ -98,6 +90,5 @@ public class Person {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
+
 }

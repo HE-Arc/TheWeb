@@ -1,10 +1,11 @@
 package com.hearc.theweb.models.entites;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Card {
@@ -14,17 +15,21 @@ public class Card {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@OneToOne
-	private Person person;
+	private String name;
+	private String firstname;
+	private String birthdate;
+	private String localisation;
 
 	public Card() {
 
 	}
 
-	public Card(long id, Person person) {
+	public Card(String name, String firstname, String birthdate, String localisation) {
 		super();
-		this.id = id;
-		this.person = person;
+		this.name = name;
+		this.firstname = firstname;
+		this.birthdate = birthdate;
+		this.localisation = localisation;
 	}
 
 	public long getId() {
@@ -35,12 +40,36 @@ public class Card {
 		this.id = id;
 	}
 
-	public Person getPerson() {
-		return person;
+	public String getName() {
+		return name;
 	}
 
-	public void setPerson(Person person) {
-		this.person = person;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getBirthdate() {
+		return birthdate;
+	}
+
+	public void setBirthdate(String birthdate) {
+		this.birthdate = birthdate;
+	}
+
+	public String getLocalisation() {
+		return localisation;
+	}
+
+	public void setLocalisation(String localisation) {
+		this.localisation = localisation;
 	}
 
 	@Override
@@ -48,10 +77,16 @@ public class Card {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Card [id=");
 		builder.append(id);
-		builder.append(", person=");
-		builder.append(person);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", firstname=");
+		builder.append(firstname);
+		builder.append(", birthdate=");
+		builder.append(birthdate);
+		builder.append(", localisation=");
+		builder.append(localisation);
 		builder.append("]");
 		return builder.toString();
 	}
-
+	
 }

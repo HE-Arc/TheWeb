@@ -14,8 +14,6 @@ import com.hearc.theweb.models.repositories.SocialMediaAccountRepository;
 public class TheWebApplication {
 
 	@Autowired
-	PersonsRepository personsRepo;
-	@Autowired
 	CardsRepository cardsRepo;
 	@Autowired
 	SocialMediaAccountRepository smaRepo;
