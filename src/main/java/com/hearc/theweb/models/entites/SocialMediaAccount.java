@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class SocialMediaAccount {
@@ -14,10 +14,10 @@ public class SocialMediaAccount {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@OneToMany
+	@OneToOne
 	private SocialMedia socialMedia;
 
-	@OneToMany
+	@OneToOne
 	private Card card;
 
 	@Column
