@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head th:replace="fragments/base :: header">
+	</head>
+	
+	<body>
+  		<div th:replace="fragments/base :: nav">[Navigation]</div>
+  		
+  		<div class="container">
+  			<div id="card-info" th:object="${card}">
+  				<p th:text="*{name}">Name</p>
+  				<p th:text="*{firstname}">First name</p>
+  				<p th:text="*{birthdate}">Birthdate</p>
+  				<p th:text="*{localisation}">Localisation</p>
+  			</div>
+  		</div>
+    		
+    	<div th:replace="fragments/base :: footer">[Footer]</div>
+	</body>
+
+</html>

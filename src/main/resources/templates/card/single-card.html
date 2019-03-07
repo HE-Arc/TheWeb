@@ -1,3 +1,5 @@
 <article th:fragment="single-card(card)" class="container">
-    <div th:text="${card}">[Card]</div>
+    <div>
+    	<a class="nav-link" th:href="@{/card/}" th:text="{card.name}">[card]</a>
+    </div>
 </article>

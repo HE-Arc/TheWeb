@@ -1,8 +1,6 @@
 package com.hearc.theweb;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -11,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.repository.init.Jackson2RepositoryPopulatorFactoryBean;
-import org.springframework.orm.jpa.JpaTransactionManager;
 
 import com.hearc.theweb.models.repositories.CardsRepository;
 import com.hearc.theweb.models.repositories.SocialMediaAccountRepository;
@@ -27,7 +24,7 @@ public class TheWebApplication {
 	@PostConstruct
 	public void init() {
 		System.out.println("init the application");
-		
+
 	}
 
 	@Bean

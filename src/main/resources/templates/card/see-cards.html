@@ -6,24 +6,28 @@
 	
 	<body>
   		<div th:replace="fragments/base :: nav">[Navigation]</div>
-  		
   		<div class="container">
-  			<div class="row">
-  				<div class="col-9">
-  					 <div th:each="card : ${cards}" th:replace="card/single-card :: single-card(card)">
-  					 	[Card]
-  					 </div>
-  				</div>
-  				<div class="col-3">
-  				
-  				</div>
-  			</div>
-  			<ul>
-	  			<li th:each="card : ${cards}" th:text="${card}"></li>
-	  		</ul>
-  		</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Name</th>
+						<th scope="col">Firstname</th>
+						<th scope="col">Localisation</th>
+						<th scope="col" />
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="card: ${cards}">
+						<td th:text="${card.name}" />
+						<td th:text="${card.firstname}" />
+						<td th:text="${card.localisation}">
+						<td><a th:href="@{/card/} + ${card.id}" th:text="#{details}" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
    		
-    		
     	<div th:replace="fragments/base :: footer">[Footer]</div>
 	</body>
 

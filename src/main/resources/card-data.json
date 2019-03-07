@@ -5,5 +5,12 @@
 	"firstname":"fn",
 	"birthdate":"01.01.1970",
 	"localisation":"City"
+	},
+	{
+	"_class":"com.hearc.theweb.models.entites.Card",
+	"name":"Biloni",
+	"firstname":"Kim Aurore",
+	"birthdate":"18.01.1998",
+	"localisation":"Neuchatel"
 	}
 ]
