@@ -1,0 +1,9 @@
+[
+	{
+	"_class":"com.hearc.theweb.models.entites.Card",
+	"name":"name",
+	"firstname":"fn",
+	"birthdate":"01.01.1970",
+	"localisation":"City"
+	}
+]
