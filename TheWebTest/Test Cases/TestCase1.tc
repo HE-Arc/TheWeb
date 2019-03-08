@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>First test case for discovering katalon</description>
+   <name>TestCase1</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>eea7be16-19d5-41ab-9425-582d20d6c5a9</testCaseGuid>
+</TestCaseEntity>
