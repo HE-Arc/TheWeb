@@ -3,8 +3,6 @@ package com.hearc.theweb.controller;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.persistence.Id;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,15 +27,12 @@ public class CardController {
 	}
 
 	@GetMapping(value = "/{Id}")
-	public String getCard(@PathVariable(value="Id") Long id, Map<String, Object> model) {
+	public String getCard(@PathVariable(value = "Id") Long id, Map<String, Object> model) {
 		Optional<Card> card = repo.findById(id);
-		try
-		{
+		if (card.isPresent()) {
 			model.put("card", card.get());
 			return "card/see-detail.html";
-		}
-		catch (Exception e)
-		{
+		} else {
 			return "redirect:/card/";
 		}
 	}
