@@ -4,7 +4,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                echo 'Building...'
+                sh 'mvn --version'
+				sh 'mvn clean test'
             }
         }
         stage('QualityTest')
@@ -15,12 +17,13 @@ pipeline {
               }
             }
         	steps {
-        	 sh'(mvn sonar:sonar -Dsonar.projectKey=JolieKimy_TheWeb -Dsonar.organization=joliekimy-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=3e09b122abbed08332a651eed10bf43130ac3286)'
+                echo 'Quality test...'
+        	    sh '(mvn sonar:sonar -Dsonar.projectKey=JolieKimy_TheWeb -Dsonar.organization=joliekimy-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=3e09b122abbed08332a651eed10bf43130ac3286)'
         	}
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                echo 'Testing...'
             }
         }
         stage('Deploy') {
