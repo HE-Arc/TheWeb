@@ -31,9 +31,11 @@ pipeline {
                 echo 'Testing...'
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+
+        post {
+            always {
+                echo 'always clean up'
+                deleteDir()
             }
         }
     }
