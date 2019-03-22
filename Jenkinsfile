@@ -23,8 +23,7 @@ pipeline {
             }
         }
 
-        stage('QualityTest')
-        {
+        stage('QualityTest') {
         	agent {
               	docker {
                		image 'maven:3-alpine'
@@ -36,8 +35,7 @@ pipeline {
         	}
         }
 
-        stage ('IntegrationTest')
-        {
+        stage ('IntegrationTest') {
             agent {
                 docker {
                     image 'lucienmoor/katalon-for-jenkins:latest'
@@ -54,12 +52,12 @@ pipeline {
                 cleanWS()
             }
         }
+    }
 
-        post {
-            always {
-                echo 'always clean up'
-                deleteDir()
-            }
+    post {
+        always {
+            echo 'always clean up'
+            deleteDir()
         }
     }
 }
