@@ -20,7 +20,7 @@
 						<li th:text="*{birthdate}" class="list-group-item">Birthdate</li>
 						<li th:text="*{localisation}" class="list-group-item">Localisation</li>
 					</ul>
-					<div class="card-body">
+					<div th:if="${not #lists.isEmpty(social_media_accounts)}" class="card-body">
 						<div class="list-group list-group-flush">
 							<a th:each="sma : ${social_media_accounts}" th:text="${sma.socialMedia}" th:href="${sma.link}">social media link</a>
 						</div>

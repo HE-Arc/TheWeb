@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head th:replace="fragments/base :: header"/>
+	
+	<body>
+  		<div th:replace="fragments/base :: nav">[Navigation]</div>
+  		
+  		<div class="container">
+  			<div class="row">
+  				<h1>Search</h1>
+  			</div>
+  			<div class="row">
+  				<p>You've searched:</p>
+  				<p th:text="${searched_value}">what you searched</p>
+  			</div>
+  			<div>
+  				<div th:if="${not #lists.isEmpty(cards)}"class="list-group list-group-flush">
+					<a th:each="card : ${cards}" th:text="${card.name} + ' ' + ${card.firstname}" th:href="@{/card/} + ${card.id}">card link</a>
+				</div>
+  			</div>
+  		</div>
+    		
+    	<div th:replace="fragments/base :: footer">[Footer]</div>
+	</body>
+</html>
