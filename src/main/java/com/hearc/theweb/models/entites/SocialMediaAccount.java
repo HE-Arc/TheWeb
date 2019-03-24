@@ -1,5 +1,6 @@
 package com.hearc.theweb.models.entites;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,7 +20,7 @@ public class SocialMediaAccount {
 	@Enumerated(EnumType.STRING)
 	private SocialMedia socialMedia;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Card card;
 
 	@Column

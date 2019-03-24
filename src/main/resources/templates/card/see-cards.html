@@ -22,7 +22,9 @@
 						<td th:text="${card.name}" />
 						<td th:text="${card.firstname}" />
 						<td th:text="${card.localisation}">
-						<td><a th:href="@{/card/} + ${card.id}" th:text="#{details}" />
+						<td>
+							<p><a th:href="@{/card/} + ${card.id}" th:text="#{details}">details</a><p>
+							<p sec:authorize="hasRole('ROLE_ADMIN') || hasRole('ROLE_MODERATOR')"><a th:href="@{/card/delete/} + ${card.id}" th:text="#{delete}">delete</a></p>
 						</td>
 					</tr>
 				</tbody>
