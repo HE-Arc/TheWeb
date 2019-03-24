@@ -1,6 +1,5 @@
 package com.hearc.theweb.controller;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -12,51 +11,42 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hearc.theweb.models.entites.Card;
+import com.hearc.theweb.models.entites.SocialMedia;
 import com.hearc.theweb.models.entites.SocialMediaAccount;
 import com.hearc.theweb.models.repositories.CardsRepository;
 import com.hearc.theweb.models.repositories.SocialMediaAccountRepository;
 
 @Controller
-@RequestMapping(value = "/card")
-public class CardController {
+@RequestMapping(value = "card/{Id}/sma")
+public class SocialMediaAccountController {
 
-	@Autowired
-	CardsRepository cardsRepository;
-	
 	@Autowired
 	SocialMediaAccountRepository smaRepository;
 
-	@GetMapping(value = "/")
-	public String getCards(Map<String, Object> model) {
-		model.put("cards", cardsRepository.findAll());
-		return "card/see-cards";
-	}
+	@Autowired
+	CardsRepository cardsRepository;
 
-	@GetMapping(value = "/{Id}")
-	public String getCard(@PathVariable(value = "Id") Long id, Map<String, Object> model) {
+	@GetMapping(value = "/add")
+	public String addSocialMediaAccountMap(@PathVariable(value = "Id") Long id, Map<String, Object> model) {
 		Optional<Card> card = cardsRepository.findById(id);
 		if (card.isPresent()) {
+			SocialMediaAccount socialMediaAccount = new SocialMediaAccount();
+			socialMediaAccount.setCard(card.get());
 			model.put("card", card.get());
-			
-			// Add the related social media accounts
-			List<SocialMediaAccount> smaList = smaRepository.findByCard(card.get());
-			model.put("social_media_accounts", smaList);
-			return "card/see-detail.html";
+			model.put("social_media_account", socialMediaAccount);
+			return "social_media_account/add";
 		} else {
 			return "redirect:/card/";
 		}
 	}
 
-	@GetMapping(value = "/add")
-	public String addPersonneMap(Map<String, Object> model) {
-		model.put("card", new Card());
-		return "card/add";
-	}
-
 	@PostMapping(value = "/save")
-	public String save(Card card) {
-		cardsRepository.save(card);
-		return "redirect:/card/";
+	public String save(@PathVariable("Id") long id, SocialMediaAccount sma) {
+		Optional<Card> card = cardsRepository.findById(id);
+		if(card.isPresent()) {
+			sma.setCard(card.get());
+			smaRepository.save(sma);
+		}
+		return "redirect:/card/"; // redirect on card related
 	}
-
 }

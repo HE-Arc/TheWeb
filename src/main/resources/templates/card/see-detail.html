@@ -1,22 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-	<head th:replace="fragments/base :: header">
-	</head>
-	
-	<body>
-  		<div th:replace="fragments/base :: nav">[Navigation]</div>
-  		
-  		<div class="container">
-  			<div id="card-info" th:object="${card}">
-  				<p th:text="*{name}">Name</p>
-  				<p th:text="*{firstname}">First name</p>
-  				<p th:text="*{birthdate}">Birthdate</p>
-  				<p th:text="*{localisation}">Localisation</p>
-  			</div>
-  		</div>
-    		
-    	<div th:replace="fragments/base :: footer">[Footer]</div>
-	</body>
+<head th:replace="fragments/base :: header">
+</head>
+
+<body>
+	<div th:replace="fragments/base :: nav">[Navigation]</div>
+
+	<div class="container justify-content-center">
+		<div class="row">
+			<div class="col-md-auto">
+				<div id="card-info" th:object="${card}" class="card"
+					style="width: 18rem;">
+					<div class="card-body">
+						<h5 th:text="*{name} + ' ' + *{firstname}" class="card-title">Name
+							&amp; FirstName</h5>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li th:text="*{birthdate}" class="list-group-item">Birthdate</li>
+						<li th:text="*{localisation}" class="list-group-item">Localisation</li>
+					</ul>
+					<div class="card-body">
+						<div class="list-group list-group-flush">
+							<a th:each="sma : ${social_media_accounts}" th:text="${sma.socialMedia}" th:href="${sma.link}">social media link</a>
+						</div>
+					</div>
+					<div class="card-footer">
+						<div class="btn-group" role="group" aria-label="Actions of cards">
+						  <a class="col-md-auto btn btn-primary" href="#" role="button">Edit Card</a>
+						  <a class="col-md-auto btn btn-primary" th:href="@{/card/} + ${card.id} + @{/sma/add}" role="button">Add Social MediaLink</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments/base :: footer">[Footer]</div>
+</body>
 
 </html>

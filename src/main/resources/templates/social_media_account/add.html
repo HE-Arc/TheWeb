@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+	<head th:replace="fragments/base :: header">
+	</head>
+	
+	<body>
+  		<div th:replace="fragments/base :: nav">[Navigation]</div>
+  		
+  		<div class="container">
+  			<div class="row">
+  				<div class="col-9">
+  				<p>Add a social media account for:<p>
+  				<p th:text="*{card.name} + ' ' + *{card.firstname}">Name & firstname of card</p>
+  				</div>
+			</div>
+  			<div class="row">
+  				<div class="col-9">  		
+			   		<form method="post" th:action="@{save}" th:object="${social_media_account}">
+					    <div class="form-group">
+						    <label for="social_medias">Example select</label>
+						    <select th:field="*{socialMedia}"class="form-control" id="social_medias">
+						      <option th:each="sm : ${T(com.hearc.theweb.models.entites.SocialMedia).values()}" th:value="${sm}" th:text="${sm.toString()}"></option>
+						    </select>
+						  </div>
+						  <div class="form-group">
+						    <label for="link">Link or account name</label>
+						    <input type="text" class="form-control" id="link" placeholder="Link or account name" th:field="*{link}">
+						  </div>
+						<button type="submit" class="btn btn-primary">Save</button>
+					</form>
+  				</div>
+  			</div>
+  		</div>
+    		
+    	<div th:replace="fragments/base :: footer">[Footer]</div>
+	</body>
+
+</html>
