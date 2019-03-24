@@ -47,6 +47,6 @@ public class SocialMediaAccountController {
 			sma.setCard(card.get());
 			smaRepository.save(sma);
 		}
-		return "redirect:/card/"; // redirect on card related
+		return "redirect:/card/" + id; // redirect on card related
 	}
 }
