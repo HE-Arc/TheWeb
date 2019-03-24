@@ -51,28 +51,41 @@ public class TheWebApplication {
 	public void init() {
 		System.out.println("init the application");
 
-		// Création d'un rôle
+		// Creation des roles
 		Role role_admin = new Role();
 		role_admin.setName("ROLE_ADMIN");
 		roleRepository.save(role_admin);
+		
+		Role role_moderator = new Role();
+		role_moderator.setName("ROLE_MODERATOR");
+		roleRepository.save(role_moderator);
 
-		// Création d'un user
-		User u_admin = new User();
-		u_admin.setUsername("admin");
-		u_admin.setPassword(bCryptPasswordEncoder.encode("password"));
-
-		// Attribution du rôle
-		Set<Role> roles_admin = new HashSet<>();
-		roles_admin.add(role_admin);
-		u_admin.setRoles(roles_admin);
-
-		userRepository.save(u_admin);
-
-		// Création d'un rôle
 		Role role_user = new Role();
 		role_user.setName("ROLE_USER");
 		roleRepository.save(role_user);
 
+		// Creation d'un admin
+		User u_admin = new User();
+		u_admin.setUsername("admin");
+		u_admin.setPassword(bCryptPasswordEncoder.encode("password"));
+		
+		Set<Role> roles_admin = new HashSet<>();
+		roles_admin.add(role_admin);
+		u_admin.setRoles(roles_admin);
+		
+		userRepository.save(u_admin);
+		
+		// Creation d'un moderator
+		User u_moderator = new User();
+		u_moderator.setUsername("moderator");
+		u_admin.setPassword("password");
+		
+		Set<Role> roles_moderator = new HashSet<>();
+		roles_moderator.add(role_moderator);
+		u_moderator.setRoles(roles_moderator);
+
+		userRepository.save(u_moderator);
+		
 		// Création d'un user
 		User u_user = new User();
 		u_user.setUsername("user");
