@@ -8,7 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class SocialMediaAccount {
@@ -20,7 +20,7 @@ public class SocialMediaAccount {
 	@Enumerated(EnumType.STRING)
 	private SocialMedia socialMedia;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Card card;
 
 	@Column
