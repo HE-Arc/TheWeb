@@ -64,6 +64,17 @@ public class CardController {
 		return "redirect:/card/";
 	}
 	
+	@GetMapping(value = "/update/{Id}")
+	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER"})
+	public String update(@PathVariable(value = "Id") Long id, Map<String, Object> model) {
+		Optional<Card> card = cardsRepository.findById(id);
+		if (card.isPresent()) {
+			model.put("card", card.get());
+			return "card/add";
+		}
+		return "redirect:/card/";
+	}
+	
 	@GetMapping(value = "/delete/{Id}")
 	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR"})
 	public String delete(@PathVariable(value = "Id") Long id) {

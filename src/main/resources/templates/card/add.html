@@ -10,7 +10,7 @@
   		<div class="container">
   			<div class="row">
   				<div class="col-9">  		
-			   		<form method="post" th:action="@{save}" th:object="${card}">
+			   		<form method="post" th:action="@{/card/save}" th:object="${card}">
 						<div class="form-group">
 					  		<label for="name" th:text="#{card.name}">Name</label>
 							<input class="form-control" type="text" id="name" name="name" th:field="*{name}">

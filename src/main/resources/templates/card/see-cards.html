@@ -12,9 +12,9 @@
 				<thead>
 					<tr>
 						<th scope="col">Name</th>
-						<th scope="col">Firstname</th>
+						<th scope="col">First name</th>
 						<th scope="col">Localisation</th>
-						<th scope="col" />
+						<th scope="col">Options</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -24,6 +24,7 @@
 						<td th:text="${card.localisation}">
 						<td>
 							<p><a th:href="@{/card/} + ${card.id}" th:text="#{details}">details</a><p>
+							<p sec:authorize="isAuthenticated()"><a th:href="@{/card/update/} + ${card.id}" th:text="#{update}">update</a><p>
 							<p sec:authorize="hasRole('ROLE_ADMIN') || hasRole('ROLE_MODERATOR')"><a th:href="@{/card/delete/} + ${card.id}" th:text="#{delete}">delete</a></p>
 						</td>
 					</tr>
