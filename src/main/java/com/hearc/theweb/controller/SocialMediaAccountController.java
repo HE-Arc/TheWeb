@@ -3,6 +3,8 @@ package com.hearc.theweb.controller;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +29,7 @@ public class SocialMediaAccountController {
 	CardsRepository cardsRepository;
 
 	@GetMapping(value = "/add")
+	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
 	public String addSocialMediaAccountMap(@PathVariable(value = "Id") Long id, Map<String, Object> model) {
 		Optional<Card> card = cardsRepository.findById(id);
 		if (card.isPresent()) {
@@ -41,6 +44,7 @@ public class SocialMediaAccountController {
 	}
 
 	@PostMapping(value = "/save")
+	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
 	public String save(@PathVariable("Id") long id, SocialMediaAccount sma) {
 		Optional<Card> card = cardsRepository.findById(id);
 		if(card.isPresent()) {

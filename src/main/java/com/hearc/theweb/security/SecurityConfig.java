@@ -31,8 +31,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("h2/**").permitAll() //
 				.and().authorizeRequests() //
 				.antMatchers("/").permitAll() //
-				.antMatchers("/card/add").authenticated() //
-				.antMatchers("/card/save").authenticated() //
 				.and().formLogin();
 
 		http.headers().frameOptions().disable();

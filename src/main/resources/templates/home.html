@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html>
-	<head th:replace="fragments/base :: header"/>
-	
-	<body>
-  		<div th:replace="fragments/base :: nav">[Navigation]</div>
-  		
-  		<div class="container">
-  			<div class="row">
-  				<p>Welcome on the Web !
-  			</div>
+<head th:replace="fragments/base :: header" />
+<body>
+	<div th:replace="fragments/base :: nav">[Navigation]</div>
+
+	<div class="container h-100">
+		<div class="row h-100 justify-content-center align-items-center">
+			<div class="col-12">
+		    	<h1 class="text-center">Welcome on the Web !</h1>
+		 	</div>
   		</div>
-    		
-    	<div th:replace="fragments/base :: footer">[Footer]</div>
-	</body>
+  		<div class="row h-100 justify-content-center align-items-center">
+	    	<form th:action="@{/}" th:object="${search}" class="form-inline my-2 my-lg-0">
+		      <input name="search" id="search" class="form-control" type="search" placeholder="Search someone" aria-label="Search someone">
+		      <button class="btn btn-outline-success" type="submit">Search</button>
+		    </form>
+  		</div>
+	</div>
+
+	<div th:replace="fragments/base :: footer">[Footer]</div>
+</body>
 </html>

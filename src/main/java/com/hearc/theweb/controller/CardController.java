@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +24,7 @@ public class CardController {
 
 	@Autowired
 	CardsRepository cardsRepository;
-	
+
 	@Autowired
 	SocialMediaAccountRepository smaRepository;
 
@@ -37,7 +39,7 @@ public class CardController {
 		Optional<Card> card = cardsRepository.findById(id);
 		if (card.isPresent()) {
 			model.put("card", card.get());
-			
+
 			// Add the related social media accounts
 			List<SocialMediaAccount> smaList = smaRepository.findByCard(card.get());
 			model.put("social_media_accounts", smaList);
@@ -48,12 +50,14 @@ public class CardController {
 	}
 
 	@GetMapping(value = "/add")
+	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
 	public String addPersonneMap(Map<String, Object> model) {
 		model.put("card", new Card());
 		return "card/add";
 	}
 
 	@PostMapping(value = "/save")
+	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
 	public String save(Card card) {
 		cardsRepository.save(card);
 		return "redirect:/card/";

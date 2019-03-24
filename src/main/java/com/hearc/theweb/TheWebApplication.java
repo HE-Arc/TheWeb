@@ -78,7 +78,7 @@ public class TheWebApplication {
 		// Creation d'un moderator
 		User u_moderator = new User();
 		u_moderator.setUsername("moderator");
-		u_admin.setPassword("password");
+		u_moderator.setPassword(bCryptPasswordEncoder.encode("password"));
 		
 		Set<Role> roles_moderator = new HashSet<>();
 		roles_moderator.add(role_moderator);
