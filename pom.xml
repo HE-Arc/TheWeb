@@ -79,6 +79,14 @@
 			<artifactId>jquery-dist</artifactId>
 			<version>3.3.1</version>
 		</dependency>
+		
+		<!-- Tests -->
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope> <!-- Permet de ne pas avoir la dépendance en production -->
+		</dependency>
 	</dependencies>
 
 	<build>
