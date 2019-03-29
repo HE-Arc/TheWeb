@@ -12,19 +12,7 @@ pipeline {
                 echo 'Building...'
                 sh 'mvn --version'
 				sh 'mvn clean package'
-            }
-        }
-
-        stage('Test') {
-            agent {
-              	docker {
-               		image 'maven:3-alpine'
-              }
-            }
-            steps {
-                echo 'Testing...'
-                sh 'mvn --version'
-                sh 'mvn clean test'
+                stash name: "app", includes: "**"
             }
         }
 
@@ -36,6 +24,8 @@ pipeline {
             }
         	steps {
                 echo 'Quality test...'
+                unstash "app"
+                sh '(mvn clean test)'
         	    sh '(mvn sonar:sonar -Dsonar.projectKey=JolieKimy_TheWeb -Dsonar.organization=joliekimy-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=3e09b122abbed08332a651eed10bf43130ac3286)'
         	}
         }
@@ -49,6 +39,7 @@ pipeline {
             }
             steps {
                 echo 'Integration test...'
+                unstash "app"
                 sh 'java -jar ./target/TheWeb-0.0.1-SNAPSHOT.jar >/dev/null 2>&1 &'
                 sh 'sleep 30'
                 sh 'chmod +x ./runTest.sh'

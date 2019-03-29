@@ -1,7 +1,7 @@
 <!-- **************** login ****************** -->
 <div th:fragment="login" class="login"
 	sec:authorize="not isAuthenticated()">
-	<a class="nav-link" th:href="@{/login}">Login</a>
+	<a id="a_login" class="nav-link" th:href="@{/login}">Login</a>
 </div>
 
 

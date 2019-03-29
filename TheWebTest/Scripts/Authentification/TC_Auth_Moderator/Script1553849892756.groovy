@@ -13,21 +13,21 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
-WebUI.openBrowser('')
+WebUI.openBrowser('http://localhost:8080')
 
-WebUI.navigateToUrl('http://localhost:8080/')
+WebUI.click(findTestObject('Object Repository/Page_/span_The Web_navbar-toggler-icon (2)'))
 
-WebUI.click(findTestObject('Object Repository/Page_/span_The Web_navbar-toggler-icon'))
+WebUI.delay(1)
 
-WebUI.click(findTestObject('Object Repository/Page_/a_Add a card'))
+WebUI.click(findTestObject('Object Repository/Page_/a_Login_1'))
 
-WebUI.setText(findTestObject('Object Repository/Page_/input_Name_name'), 'Jolie')
+WebUI.setText(findTestObject('Page_Please sign in/input_Username_username'), 'user')
 
-WebUI.setText(findTestObject('Object Repository/Page_/input_Firstname_firstname'), 'Kimy')
+WebUI.setEncryptedText(findTestObject('Page_Please sign in/input_Password_password'), '8SQVv/p9jVScEs4/2CZsLw==')
 
-WebUI.setText(findTestObject('Object Repository/Page_/input_Birthdate_birthdate'), '21.12.1991')
+WebUI.click(findTestObject('Page_Please sign in/button_Sign in'))
 
-WebUI.setText(findTestObject('Object Repository/Page_/input_Localisation_localisation'), 'Kataloni')
+WebUI.click(findTestObject('Object Repository/Page_/a_The Web (1)'))
 
-WebUI.click(findTestObject('Object Repository/Page_/button_Save'))
+WebUI.closeBrowser()
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>input_Name_name</name>
+   <name>input_Name_name (1)</name>
    <tag></tag>
-   <elementGuidId>17a17db1-05e9-4235-abbc-4b043cdb0eba</elementGuidId>
+   <elementGuidId>7a589bd3-bf57-4a3b-9be1-da8ff317fa9a</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>

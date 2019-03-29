@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestSuiteEntity>
    <description></description>
-   <name>TS_Card</name>
+   <name>TS_Authentification</name>
    <tag></tag>
    <isRerun>false</isRerun>
    <mailRecipient></mailRecipient>
@@ -9,11 +9,17 @@
    <pageLoadTimeout>30</pageLoadTimeout>
    <pageLoadTimeoutDefault>true</pageLoadTimeoutDefault>
    <rerunFailedTestCasesOnly>false</rerunFailedTestCasesOnly>
-   <testSuiteGuid>c869289d-c720-4afb-adab-fa03f5c8deb7</testSuiteGuid>
+   <testSuiteGuid>2026f7e3-f1e8-4a99-9ac3-900cc584d97c</testSuiteGuid>
    <testCaseLink>
-      <guid>2304673b-aa35-41f5-a4a1-e0f3e0902357</guid>
+      <guid>ea71effd-b787-4009-868f-0d0b4668d5e8</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/TC_AddCard</testCaseId>
+      <testCaseId>Test Cases/Authentification/TC_Auth_Moderator</testCaseId>
+   </testCaseLink>
+   <testCaseLink>
+      <guid>59f4714e-11bd-48c3-bfcf-594a505c5d41</guid>
+      <isReuseDriver>false</isReuseDriver>
+      <isRun>true</isRun>
+      <testCaseId>Test Cases/Authentification/TC_Auth_User</testCaseId>
    </testCaseLink>
 </TestSuiteEntity>
