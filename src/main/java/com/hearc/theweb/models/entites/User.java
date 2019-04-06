@@ -7,17 +7,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
+	@NotNull
+	@NotEmpty
 	private String username;
-	private String password;
 	
+	@NotNull
+	@NotEmpty
+	private String password;
+
 	@ManyToMany
 	Set<Role> roles;
 
