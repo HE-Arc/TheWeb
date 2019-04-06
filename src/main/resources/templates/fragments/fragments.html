@@ -1,6 +1,7 @@
-<!-- **************** login ****************** -->
+<!-- **************** login & registration ****************** -->
 <div th:fragment="login" class="login"
 	sec:authorize="not isAuthenticated()">
+	<a id="a_register" class="nav-link" th:href="@{/register}">Register</a>
 	<a id="a_login" class="nav-link" th:href="@{/login}">Login</a>
 </div>
 

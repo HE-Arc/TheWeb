@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hearc.theweb.models.entites.Card;
-import com.hearc.theweb.models.entites.SocialMedia;
 import com.hearc.theweb.models.entites.SocialMediaAccount;
 import com.hearc.theweb.models.repositories.CardsRepository;
 import com.hearc.theweb.models.repositories.SocialMediaAccountRepository;
@@ -47,7 +46,7 @@ public class SocialMediaAccountController {
 	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
 	public String save(@PathVariable("Id") long id, SocialMediaAccount sma) {
 		Optional<Card> card = cardsRepository.findById(id);
-		if(card.isPresent()) {
+		if (card.isPresent()) {
 			sma.setCard(card.get());
 			smaRepository.save(sma);
 		}

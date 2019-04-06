@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hearc.theweb.dto.UserDTO;
+import com.hearc.theweb.exception.UserExistsException;
 import com.hearc.theweb.models.entites.Role;
 import com.hearc.theweb.models.entites.User;
 import com.hearc.theweb.models.repositories.RoleRepositoy;
@@ -36,7 +37,7 @@ public class UserDetailsService_TW implements UserDetailsService {
 
 	@Autowired
 	private RoleRepositoy roleRepository;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -57,7 +58,11 @@ public class UserDetailsService_TW implements UserDetailsService {
 	}
 
 	@Transactional
-	public User registerNewUserAccount(UserDTO accountDTO) {
+	public User registerNewUserAccount(UserDTO accountDTO) throws UserExistsException {
+		if (userExist(accountDTO.getUsername())) {
+			throw new UserExistsException("There is an account with that username: " + accountDTO.getUsername());
+		}
+
 		User user = new User();
 		user.setUsername(accountDTO.getUsername());
 		user.setPassword(bCryptPasswordEncoder.encode(accountDTO.getPassword()));
@@ -67,7 +72,21 @@ public class UserDetailsService_TW implements UserDetailsService {
 		Role role_user = roleRepository.findByName("ROLE_USER");
 		roles.add(role_user);
 		user.setRoles(roles);
-		
+
 		return userRepository.save(user);
+	}
+
+	/**
+	 * Check if the username exists in the user repository
+	 * 
+	 * @param username
+	 * @return true if user exists
+	 */
+	private boolean userExist(String username) {
+		User user = userRepository.findByUsername(username);
+		if (user != null) {
+			return true;
+		}
+		return false;
 	}
 }

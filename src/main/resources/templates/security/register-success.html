@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<head th:replace="fragments/base :: header">
+</head>
+
+<body>
+	<div th:replace="fragments/base :: nav">[Navigation]</div>
+	<div class="container">
+		<h1 th:text="#{label.register.title}">register</h1>
+		<p>You've been successfully registered ! You can use your account to login.</p>
+		<a th:href="@{/login}" th:text="#{label.form.loginLink}" class="btn btn-primary">login</a>
+	</div>
+	
+	<div th:replace="fragments/base :: footer">[Footer]</div>
+</body>
+</html>
