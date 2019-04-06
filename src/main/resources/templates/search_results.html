@@ -18,6 +18,8 @@
 					<a th:each="card : ${cards}" th:text="${card.name} + ' ' + ${card.firstname}" th:href="@{/card/} + ${card.id}">card link</a>
 				</div>
   			</div>
+  			<div th:replace="fragments/fragments :: pagination">[pagination]</div>
+  			
   		</div>
     		
     	<div th:replace="fragments/base :: footer">[Footer]</div>

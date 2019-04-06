@@ -19,3 +19,34 @@
 		</form>
 	</div>
 </div>
+
+<!-- **************** Pagination cards ****************** -->
+<div th:fragment="pagination" class="row">
+	<nav aria-label="Pagination">
+		<ul class="pagination justify-content-center">
+			<span th:if="${has_previous}">
+				<li class="page-item">
+					<a class="page-link" th:href="@{/(search=${searched_value}, page=${current_page}-1)}">Previous</a>
+			    </li>
+			</span>
+			<span th:unless="${has_previous}">
+				<li class="page-item disabled">
+					<span class="page-link">Previous</span>
+			    </li>
+			</span>
+			<li class="page-item">
+				<a class="page-link" th:href="@{/(search=${searched_value}, page=${current_page})}" th:text="${current_page}">0</a>
+			</li>
+			<span th:if="${has_next}">
+				<li class="page-item">
+					<a class="page-link" th:href="@{/(search=${searched_value}, page=${current_page}+1)}">Next</a>
+			    </li>
+			</span>
+			<span th:unless="${has_next}">
+				<li class="page-item disabled">
+					<span class="page-link">Next</span>
+			    </li>
+			</span>
+		</ul>
+	</nav>
+</div>
