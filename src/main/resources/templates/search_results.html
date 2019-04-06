@@ -9,17 +9,16 @@
   			<div class="row">
   				<h1>Search</h1>
   			</div>
+			<h4 class="row" th:text="#{text.searched} + ': ' + ${searched_value}">[what was searched]</h4>
   			<div class="row">
-  				<p>You've searched:</p>
-  				<p th:text="${searched_value}">what you searched</p>
-  			</div>
-  			<div>
-  				<div th:if="${not #lists.isEmpty(cards)}"class="list-group list-group-flush">
+  				<div th:if="${not #lists.isEmpty(cards)}" class="list-group list-group-flush">
 					<a th:each="card : ${cards}" th:text="${card.name} + ' ' + ${card.firstname}" th:href="@{/card/} + ${card.id}">card link</a>
+				</div>
+				<div th:unless="${not #lists.isEmpty(cards)}">
+					<p th:text="#{text.noresult}">[what was searched]</p>
 				</div>
   			</div>
   			<div th:replace="fragments/fragments :: pagination">[pagination]</div>
-  			
   		</div>
     		
     	<div th:replace="fragments/base :: footer">[Footer]</div>
