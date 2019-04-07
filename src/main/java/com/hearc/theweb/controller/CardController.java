@@ -53,14 +53,14 @@ public class CardController {
 	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
 	public String addPersonneMap(Map<String, Object> model) {
 		model.put("card", new Card());
-		return "card/add";
+		return "card/form";
 	}
 
 	@PostMapping(value = "/save")
 	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
 	public String save(Card card) {
 		cardsRepository.save(card);
-		return "redirect:/card/";
+		return "redirect:/card/" + card.getId();
 	}
 	
 	@GetMapping(value = "/update/{Id}")
@@ -69,7 +69,7 @@ public class CardController {
 		Optional<Card> card = cardsRepository.findById(id);
 		if (card.isPresent()) {
 			model.put("card", card.get());
-			return "card/add";
+			return "card/form";
 		}
 		return "redirect:/card/";
 	}
