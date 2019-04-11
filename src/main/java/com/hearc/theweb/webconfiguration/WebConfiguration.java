@@ -9,10 +9,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebMvc
 @EnableSpringDataWebSupport
-public class WebConfiguration /*implements WebMvcConfigurer*/ {
+public class WebConfiguration implements WebMvcConfigurer {
 
-	/*@Override
+	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-	}*/
+		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+	}
 }
