@@ -67,9 +67,8 @@ public class CardController {
 	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
 	public String save(@ModelAttribute("card") Card card,
 			@RequestParam(value = "picturefile", required = false) MultipartFile file) {
-		
-		storageService.store(file);
-		
+		storageService.storeCardPicture(file, card.getId());
+		card.setHasPicture(true);
 		cardsRepository.save(card);
 		return "redirect:/card/" + card.getId();
 	}

@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * StorageService Interface used for file management
+ * 
  * @author kim.biloni
  *
  */
@@ -16,6 +17,8 @@ public interface StorageService {
 	void init();
 
 	void store(MultipartFile file);
+
+	void storeCardPicture(MultipartFile file, long cardId);
 
 	Stream<Path> loadAll();
 

@@ -25,10 +25,12 @@ import com.hearc.theweb.properties.StorageProperties;
 public class FileSystemStorageService implements StorageService {
 
 	private final Path rootLocation;
+	private final Path cardsLocation;
 
 	@Autowired
 	public FileSystemStorageService(StorageProperties properties) {
 		this.rootLocation = Paths.get(properties.getLocation()); // TODO Check the location desired
+		this.cardsLocation = Paths.get(properties.getCardsLocation());
 	}
 
 	@Override
@@ -45,6 +47,27 @@ public class FileSystemStorageService implements StorageService {
 			try (InputStream inputStream = file.getInputStream()) {
 				Files.copy(inputStream, this.rootLocation.resolve(filename), StandardCopyOption.REPLACE_EXISTING);
 			}
+		} catch (IOException e) {
+			throw new StorageException("Failed to store file " + filename, e);
+		}
+	}
+
+	@Override
+	public void storeCardPicture(MultipartFile file, long cardId) {
+		String filename = StringUtils.cleanPath(file.getOriginalFilename());
+		try {
+			if (file.isEmpty()) {
+				throw new StorageException("Failed to store empty file " + filename);
+			}
+			if (filename.contains("..")) {
+				throw new StorageException(
+						"Cannot store file with relative path outside current directory " + filename);
+			}
+			String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
+			String cardFilename = new StringBuilder().append("card-").append(cardId).append(".").append(extension).toString();
+			Path cardPath = this.cardsLocation.resolve(cardFilename);
+			
+			file.transferTo(cardPath);
 		} catch (IOException e) {
 			throw new StorageException("Failed to store file " + filename, e);
 		}
@@ -89,6 +112,7 @@ public class FileSystemStorageService implements StorageService {
 	public void init() {
 		try {
 			Files.createDirectories(rootLocation);
+			Files.createDirectories(cardsLocation);
 		} catch (IOException e) {
 			throw new StorageException("Could not initialize storage", e);
 		}
