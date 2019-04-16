@@ -12,7 +12,8 @@
 			<div class="col-md-auto">
 				<div id="card-info" th:object="${card}" class="card"
 					style="width: 18rem;">
-					<img th:unless="*{hasPicture}" th:src="@{/images/cards/card-default.png}" class="card-img-top" alt="Card image">
+					<img th:if="*{hasPicture}" th:src="@{${picturepath}}" class="card-img-top" alt="Card image">
+					<img th:unless="*{hasPicture}" th:src="@{/static/images/cards/card-default.png}" class="card-img-top" alt="Card image">
 					<div class="card-body">
 						<h5 th:text="*{name} + ' ' + *{firstname}" class="card-title">[Name &amp; FirstName]</h5>
 					</div>

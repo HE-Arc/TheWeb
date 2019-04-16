@@ -52,6 +52,7 @@ public class ImageUploadController {
 	@GetMapping("/{filename:.+") // names conflict ?
 	@ResponseBody
 	public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
+		System.out.println("request "+ filename);
 		Resource file = storageService.loadAsResource(filename);
 		
 		// Do we need it ? 

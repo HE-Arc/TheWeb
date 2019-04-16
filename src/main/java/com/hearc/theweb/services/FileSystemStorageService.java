@@ -1,5 +1,6 @@
 package com.hearc.theweb.services;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -64,9 +65,10 @@ public class FileSystemStorageService implements StorageService {
 						"Cannot store file with relative path outside current directory " + filename);
 			}
 			String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
-			String cardFilename = new StringBuilder().append("card-").append(cardId).append(".").append(extension).toString();
+			String cardFilename = new StringBuilder().append(getFilenameOfCardPicture(cardId)).append(extension)
+					.toString();
 			Path cardPath = this.cardsLocation.resolve(cardFilename);
-			
+
 			file.transferTo(cardPath);
 		} catch (IOException e) {
 			throw new StorageException("Failed to store file " + filename, e);
@@ -86,6 +88,23 @@ public class FileSystemStorageService implements StorageService {
 	@Override
 	public Path load(String filename) {
 		return rootLocation.resolve(filename);
+	}
+
+	@Override
+	public Path loadCardPicture(long cardId) throws IOException {
+		String filename = getFilenameOfCardPicture(cardId);
+		Stream<Path> stream = Files.find(cardsLocation, 1, (path, basicFilesAttributes) -> {
+			File file = path.toFile();
+			return !file.isDirectory() && file.getName().contains(filename);
+		});
+		Path file = null;
+		try {
+			file = stream.findFirst().get();
+			System.out.println("found file: " + file.getFileName());
+		} finally {
+			stream.close();
+		}
+		return file;
 	}
 
 	@Override
@@ -110,11 +129,17 @@ public class FileSystemStorageService implements StorageService {
 
 	@Override
 	public void init() {
+		System.out.println("start storage service");
 		try {
 			Files.createDirectories(rootLocation);
 			Files.createDirectories(cardsLocation);
+
 		} catch (IOException e) {
 			throw new StorageException("Could not initialize storage", e);
 		}
+	}
+
+	private static String getFilenameOfCardPicture(long cardId) {
+		return new StringBuilder().append("card-").append(cardId).append(".").toString();
 	}
 }

@@ -1,5 +1,6 @@
 package com.hearc.theweb.services;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
@@ -23,6 +24,8 @@ public interface StorageService {
 	Stream<Path> loadAll();
 
 	Path load(String filename);
+
+	Path loadCardPicture(long cardId) throws IOException;
 
 	Resource loadAsResource(String filename);
 

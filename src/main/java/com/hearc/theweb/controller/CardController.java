@@ -43,13 +43,24 @@ public class CardController {
 
 	@GetMapping(value = "/{Id}")
 	public String getCard(@PathVariable(value = "Id") Long id, Map<String, Object> model) {
-		Optional<Card> card = cardsRepository.findById(id);
-		if (card.isPresent()) {
-			model.put("card", card.get());
+		Optional<Card> optionnalCard = cardsRepository.findById(id);
+		if (optionnalCard.isPresent()) {
+			Card card = optionnalCard.get();
+			model.put("card", card);
 
 			// Add the related social media accounts
-			List<SocialMediaAccount> smaList = smaRepository.findByCard(card.get());
+			List<SocialMediaAccount> smaList = smaRepository.findByCard(card);
 			model.put("social_media_accounts", smaList);
+
+			// Get the picture path
+			if (card.isHasPicture()) {
+				try {
+					String accessname = "/cards_pictures/" + storageService.loadCardPicture(card.getId()).getFileName();
+					model.put("picturepath", accessname);
+				} catch (Exception e) {
+					model.put("picturepath", "/static/images/cards/card-default.png");
+				}
+			}
 			return "card/see-detail.html";
 		} else {
 			return "redirect:/card/";
