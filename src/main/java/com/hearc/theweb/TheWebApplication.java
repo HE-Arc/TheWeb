@@ -6,8 +6,10 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -20,8 +22,11 @@ import com.hearc.theweb.models.repositories.CardsRepository;
 import com.hearc.theweb.models.repositories.RoleRepositoy;
 import com.hearc.theweb.models.repositories.SocialMediaAccountRepository;
 import com.hearc.theweb.models.repositories.UserRepository;
+import com.hearc.theweb.properties.StorageProperties;
+import com.hearc.theweb.services.StorageService;
 
 @SpringBootApplication
+@EnableConfigurationProperties(StorageProperties.class)
 public class TheWebApplication {
 
 	@Autowired
@@ -55,7 +60,7 @@ public class TheWebApplication {
 		Role role_admin = new Role();
 		role_admin.setName("ROLE_ADMIN");
 		roleRepository.save(role_admin);
-		
+
 		Role role_moderator = new Role();
 		role_moderator.setName("ROLE_MODERATOR");
 		roleRepository.save(role_moderator);
@@ -68,24 +73,24 @@ public class TheWebApplication {
 		User u_admin = new User();
 		u_admin.setUsername("admin");
 		u_admin.setPassword(bCryptPasswordEncoder.encode("password"));
-		
+
 		Set<Role> roles_admin = new HashSet<>();
 		roles_admin.add(role_admin);
 		u_admin.setRoles(roles_admin);
-		
+
 		userRepository.save(u_admin);
-		
+
 		// Creation d'un moderator
 		User u_moderator = new User();
 		u_moderator.setUsername("moderator");
 		u_moderator.setPassword(bCryptPasswordEncoder.encode("password"));
-		
+
 		Set<Role> roles_moderator = new HashSet<>();
 		roles_moderator.add(role_moderator);
 		u_moderator.setRoles(roles_moderator);
 
 		userRepository.save(u_moderator);
-		
+
 		// Création d'un user
 		User u_user = new User();
 		u_user.setUsername("user");
@@ -104,5 +109,13 @@ public class TheWebApplication {
 		Jackson2RepositoryPopulatorFactoryBean factory = new Jackson2RepositoryPopulatorFactoryBean();
 		factory.setResources(new Resource[] { new ClassPathResource("card-data.json") });
 		return factory;
+	}
+
+	@Bean
+	CommandLineRunner init(StorageService storageService) {
+		return (args) -> {
+			storageService.deleteAll();
+			storageService.init();
+		};
 	}
 }

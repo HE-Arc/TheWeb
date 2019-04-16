@@ -9,9 +9,12 @@ import javax.annotation.security.RolesAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hearc.theweb.models.entites.Card;
 import com.hearc.theweb.models.entites.SocialMediaAccount;
@@ -58,13 +61,19 @@ public class CardController {
 
 	@PostMapping(value = "/save")
 	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
-	public String save(Card card) {
+	public String save(@ModelAttribute("card") Card card,
+			@RequestParam(value = "picturefile", required = false) MultipartFile file) {
+		if(!file.isEmpty()) {
+			
+		}
+		
+		System.out.println(file.getOriginalFilename());
 		cardsRepository.save(card);
 		return "redirect:/card/" + card.getId();
 	}
-	
+
 	@GetMapping(value = "/update/{Id}")
-	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER"})
+	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
 	public String update(@PathVariable(value = "Id") Long id, Map<String, Object> model) {
 		Optional<Card> card = cardsRepository.findById(id);
 		if (card.isPresent()) {
@@ -73,9 +82,9 @@ public class CardController {
 		}
 		return "redirect:/card/";
 	}
-	
+
 	@GetMapping(value = "/delete/{Id}")
-	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR"})
+	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR" })
 	public String delete(@PathVariable(value = "Id") Long id) {
 		Optional<Card> card = cardsRepository.findById(id);
 		if (card.isPresent()) {

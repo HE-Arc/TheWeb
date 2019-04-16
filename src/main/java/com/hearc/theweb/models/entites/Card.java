@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.beans.factory.annotation.Value;
+
 @Entity
 public class Card {
 
@@ -17,6 +19,9 @@ public class Card {
 	private String firstname;
 	private String birthdate;
 	private String localisation;
+	
+	@Value("${some.key:}")
+	private String picturefilename;
 
 	public Card() {
 
@@ -70,6 +75,14 @@ public class Card {
 		this.localisation = localisation;
 	}
 
+	public String getPicturefilename() {
+		return picturefilename;
+	}
+
+	public void setPicturefilename(String picturefilename) {
+		this.picturefilename = picturefilename;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -83,6 +96,8 @@ public class Card {
 		builder.append(birthdate);
 		builder.append(", localisation=");
 		builder.append(localisation);
+		builder.append(", picturefilename=");
+		builder.append(picturefilename);
 		builder.append("]");
 		return builder.toString();
 	}
