@@ -20,6 +20,7 @@ import com.hearc.theweb.models.entites.Card;
 import com.hearc.theweb.models.entites.SocialMediaAccount;
 import com.hearc.theweb.models.repositories.CardsRepository;
 import com.hearc.theweb.models.repositories.SocialMediaAccountRepository;
+import com.hearc.theweb.services.StorageService;
 
 @Controller
 @RequestMapping(value = "/card")
@@ -30,6 +31,9 @@ public class CardController {
 
 	@Autowired
 	SocialMediaAccountRepository smaRepository;
+
+	@Autowired
+	StorageService storageService;
 
 	@GetMapping(value = "/")
 	public String getCards(Map<String, Object> model) {
@@ -63,11 +67,9 @@ public class CardController {
 	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
 	public String save(@ModelAttribute("card") Card card,
 			@RequestParam(value = "picturefile", required = false) MultipartFile file) {
-		if(!file.isEmpty()) {
-			
-		}
 		
-		System.out.println(file.getOriginalFilename());
+		storageService.store(file);
+		
 		cardsRepository.save(card);
 		return "redirect:/card/" + card.getId();
 	}

@@ -20,8 +20,8 @@ public class Card {
 	private String birthdate;
 	private String localisation;
 	
-	@Value("${some.key:}")
-	private String picturefilename;
+	@Value("${some.key:false}")
+	private boolean hasPicture;
 
 	public Card() {
 
@@ -75,12 +75,12 @@ public class Card {
 		this.localisation = localisation;
 	}
 
-	public String getPicturefilename() {
-		return picturefilename;
+	public boolean isHasPicture() {
+		return hasPicture;
 	}
 
-	public void setPicturefilename(String picturefilename) {
-		this.picturefilename = picturefilename;
+	public void setHasPicture(boolean hasPicture) {
+		this.hasPicture = hasPicture;
 	}
 
 	@Override
@@ -96,8 +96,8 @@ public class Card {
 		builder.append(birthdate);
 		builder.append(", localisation=");
 		builder.append(localisation);
-		builder.append(", picturefilename=");
-		builder.append(picturefilename);
+		builder.append(", hasPicture=");
+		builder.append(hasPicture);
 		builder.append("]");
 		return builder.toString();
 	}
