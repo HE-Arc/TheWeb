@@ -49,7 +49,7 @@ public class ImageUploadController {
 		return "/uploadform";
 	}
 
-	@GetMapping("/{filename:.+") // names conflict ?
+	@GetMapping("/{filename:.+")
 	@ResponseBody
 	public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
 		System.out.println("request "+ filename);

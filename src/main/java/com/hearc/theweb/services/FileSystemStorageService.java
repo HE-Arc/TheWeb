@@ -92,19 +92,22 @@ public class FileSystemStorageService implements StorageService {
 
 	@Override
 	public Path loadCardPicture(long cardId) throws IOException {
+		System.out.println("try to load card picture");
 		String filename = getFilenameOfCardPicture(cardId);
+		System.out.println("constructu filename as " + filename);
 		Stream<Path> stream = Files.find(cardsLocation, 1, (path, basicFilesAttributes) -> {
 			File file = path.toFile();
+			System.out.println("found file:" + file.toString());
 			return !file.isDirectory() && file.getName().contains(filename);
 		});
 		Path file = null;
 		try {
 			file = stream.findFirst().get();
-			System.out.println("found file: " + file.getFileName());
+			System.out.println("found file: " + file.toString());
+			return file;
 		} finally {
 			stream.close();
 		}
-		return file;
 	}
 
 	@Override
@@ -119,6 +122,22 @@ public class FileSystemStorageService implements StorageService {
 			}
 		} catch (MalformedURLException e) {
 			throw new StorageImageNotFoundException("Could not read file: " + filename, e);
+		}
+	}
+
+	@Override
+	public Resource loadCardPictureAsResource(String filename) {
+		try {
+			System.out.println("try to load card picture as resource");
+			Path file = loadCardPicture((long) 2);
+			Resource resource = new UrlResource(file.toUri());
+			if (resource.exists() || resource.isReadable()) {
+				return resource;
+			} else {
+				throw new StorageImageNotFoundException("Could not find picture of card: " + 2);
+			}
+		} catch (Exception e) {
+			throw new StorageImageNotFoundException("Could not find picture of card: " + 2, e);
 		}
 	}
 
