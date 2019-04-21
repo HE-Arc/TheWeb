@@ -26,12 +26,10 @@ import com.hearc.theweb.properties.StorageProperties;
 public class FileSystemStorageService implements StorageService {
 
 	private final Path rootLocation;
-	private final Path cardsLocation;
 
 	@Autowired
 	public FileSystemStorageService(StorageProperties properties) {
 		this.rootLocation = Paths.get(properties.getLocation()); // TODO Check the location desired
-		this.cardsLocation = Paths.get(properties.getCardsLocation());
 	}
 
 	@Override
@@ -67,7 +65,7 @@ public class FileSystemStorageService implements StorageService {
 			String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
 			String cardFilename = new StringBuilder().append(getFilenameOfCardPicture(cardId)).append(extension)
 					.toString();
-			Path cardPath = this.cardsLocation.resolve(cardFilename);
+			Path cardPath = this.rootLocation.resolve(cardFilename);
 
 			file.transferTo(cardPath);
 		} catch (IOException e) {
@@ -95,7 +93,7 @@ public class FileSystemStorageService implements StorageService {
 		System.out.println("try to load card picture");
 		String filename = getFilenameOfCardPicture(cardId);
 		System.out.println("constructu filename as " + filename);
-		Stream<Path> stream = Files.find(cardsLocation, 1, (path, basicFilesAttributes) -> {
+		Stream<Path> stream = Files.find(rootLocation, 1, (path, basicFilesAttributes) -> {
 			File file = path.toFile();
 			System.out.println("found file:" + file.toString());
 			return !file.isDirectory() && file.getName().contains(filename);
@@ -151,7 +149,6 @@ public class FileSystemStorageService implements StorageService {
 		System.out.println("start storage service");
 		try {
 			Files.createDirectories(rootLocation);
-			Files.createDirectories(cardsLocation);
 
 		} catch (IOException e) {
 			throw new StorageException("Could not initialize storage", e);

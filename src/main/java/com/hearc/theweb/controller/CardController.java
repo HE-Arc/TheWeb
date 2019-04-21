@@ -60,7 +60,8 @@ public class CardController {
 			if (card.isHasPicture()) {
 				try {
 					String accessname = storageService.loadCardPicture(card.getId()).getFileName().toString();
-					model.put("picturepath", accessname);
+					System.out.println("access name: " +  accessname);
+					model.put("picturepath", "/card/img/" + accessname);
 				} catch (Exception e) {
 					model.put("picturepath", "/static/images/cards/card-default.png");
 				}
@@ -80,8 +81,7 @@ public class CardController {
 
 	@PostMapping(value = "/save")
 	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
-	public String save(@ModelAttribute("card") Card card,
-			@RequestParam(value = "picturefile", required = false) MultipartFile file) {
+	public String save(@ModelAttribute("card") Card card, @RequestParam(value = "picturefile", required = false) MultipartFile file) {
 		storageService.storeCardPicture(file, card.getId());
 		card.setHasPicture(true);
 		cardsRepository.save(card);
@@ -109,7 +109,7 @@ public class CardController {
 		return "redirect:/card/";
 	}
 	
-	@GetMapping(value="/{filename:.+")
+	@GetMapping(value="/img/{filename:.+}")
 	@ResponseBody
 	public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
 		System.out.println("request "+ filename);
