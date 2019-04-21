@@ -12,15 +12,13 @@
 			<div class="col-md-auto">
 				<div id="card-info" th:object="${card}" class="card"
 					style="width: 18rem;">
-					<img th:if="*{hasPicture}" th:src="@{${picturepath}}" class="card-img-top" alt="Card image">
-					<img th:unless="*{hasPicture}" th:src="@{/static/images/cards/card-default.png}" class="card-img-top" alt="Card image">
+					<img th:src="@{${picturepath}}" class="card-img-top" alt="Card image">
 					<div class="card-body">
 						<h5 th:text="*{name} + ' ' + *{firstname}" class="card-title">[Name &amp; FirstName]</h5>
 					</div>
 					<ul class="list-group list-group-flush">
 						<li th:text="*{birthdate}" class="list-group-item">[Birthdate]</li>
 						<li th:text="*{localisation}" class="list-group-item">[Localisation]</li>
-						<li th:if="*{hasPicture}" class="list-group-item">has a picture</li>
 					</ul>
 					<div th:if="${not #lists.isEmpty(social_media_accounts)}" class="card-body">
 						<div class="list-group list-group-flush">

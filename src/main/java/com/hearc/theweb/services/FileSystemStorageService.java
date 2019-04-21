@@ -29,7 +29,7 @@ public class FileSystemStorageService implements StorageService {
 
 	@Autowired
 	public FileSystemStorageService(StorageProperties properties) {
-		this.rootLocation = Paths.get(properties.getLocation()); // TODO Check the location desired
+		this.rootLocation = Paths.get(properties.getLocation());
 	}
 
 	@Override
@@ -127,15 +127,16 @@ public class FileSystemStorageService implements StorageService {
 	public Resource loadCardPictureAsResource(String filename) {
 		try {
 			System.out.println("try to load card picture as resource");
-			Path file = loadCardPicture((long) 2);
+			System.out.println("loadCardPictureAsResource: " + filename);
+			Path file = this.rootLocation.resolve(filename);
 			Resource resource = new UrlResource(file.toUri());
 			if (resource.exists() || resource.isReadable()) {
 				return resource;
 			} else {
-				throw new StorageImageNotFoundException("Could not find picture of card: " + 2);
+				throw new StorageImageNotFoundException("Could not find picture of card: " + filename);
 			}
 		} catch (Exception e) {
-			throw new StorageImageNotFoundException("Could not find picture of card: " + 2, e);
+			throw new StorageImageNotFoundException("Could not find picture of card: " + filename, e);
 		}
 	}
 

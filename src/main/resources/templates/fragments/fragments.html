@@ -1,24 +1,23 @@
-<!-- **************** login & registration ****************** -->
-<div th:fragment="login" class="login"
-	sec:authorize="not isAuthenticated()">
+<!-- **************** Registration ****************** -->
+<li th:fragment="registration" sec:authorize="not isAuthenticated()" class="nav-item">
 	<a id="a_register" class="nav-link" th:href="@{/register}">Register</a>
-	<a id="a_login" class="nav-link" th:href="@{/login}">Login</a>
-</div>
+</li>
 
+<!-- **************** Login ****************** -->
+<li th:fragment="login" sec:authorize="not isAuthenticated()"class="nav-item">
+	<a id="a_login" class="nav-link" th:href="@{/login}" th:text="#{label.form.loginLink}">Login</a>
+</li>
 
 <!-- **************** logout ****************** -->
-<div th:fragment="logout" class="logout"
-	sec:authorize="isAuthenticated()">
-	<p>
-		Utilisateur: <span sec:authentication="name">[]</span> Roles: <span
-			sec:authentication="principal.authorities"></span>
-	</p>
-	<div>
-		<form action="#" th:action="@{/logout}" method="post">
-			<input class="button" type="submit" value="Logout" />
-		</form>
-	</div>
-</div>
+
+<li th:fragment="logout" sec:authorize="isAuthenticated()" class="nav-item dropdown">
+	<a sec:authentication="name" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    	[username]
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+    	<a class="dropdown-item" th:href="@{/logout}" th:text="#{label.form.logoutLink}">[Logout]</a>
+    </div>
+</li>
 
 <!-- **************** Pagination cards ****************** -->
 <div th:fragment="pagination" class="row">
