@@ -76,14 +76,14 @@ public class CardController {
 
 	@GetMapping(value = "/add")
 	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
-	public String addPersonneMap(Map<String, Object> model) {
+	public String addCard(Map<String, Object> model) {
 		model.put("card", new Card());
 		return "card/form";
 	}
 
 	@PostMapping(value = "/save")
 	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
-	public String save(@ModelAttribute("card") Card card,
+	public String saveCard(@ModelAttribute("card") Card card,
 			@RequestParam(value = "picturefile", required = false) MultipartFile file) {
 		storageService.storeCardPicture(file, card.getId());
 		card.setHasPicture(true);
@@ -93,7 +93,7 @@ public class CardController {
 
 	@GetMapping(value = "/update/{Id}")
 	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
-	public String update(@PathVariable(value = "Id") Long id, Map<String, Object> model) {
+	public String updateCard(@PathVariable(value = "Id") Long id, Map<String, Object> model) {
 		Optional<Card> card = cardsRepository.findById(id);
 		if (card.isPresent()) {
 			model.put("card", card.get());
@@ -104,10 +104,11 @@ public class CardController {
 
 	@GetMapping(value = "/delete/{Id}")
 	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR" })
-	public String delete(@PathVariable(value = "Id") Long id) {
+	public String deleteCard(@PathVariable(value = "Id") Long id) {
 		Optional<Card> card = cardsRepository.findById(id);
 		if (card.isPresent()) {
 			cardsRepository.delete(card.get());
+			// TODO suppression de l'image
 		}
 		return "redirect:/card/";
 	}
