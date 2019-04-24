@@ -27,8 +27,8 @@
 					</div>
 					<div class="card-footer" sec:authorize="isAuthenticated()">
 						<div class="btn-group" role="group" aria-label="Actions of cards">
-						  <a sec:authorize="isAuthenticated()" class="col-md-auto btn btn-primary" th:href="@{/card/update/} + ${card.id}" th:text="#{update}"role="button">[update]</a>
-						  <a sec:authorize="hasRole('ROLE_ADMIN') || hasRole('ROLE_MODERATOR')" class="col-md-auto btn btn-primary" th:href="@{/card/delete/} + ${card.id}" th:text="#{delete}" role="button">[delete]</a>
+						  <a class="col-md-auto btn btn-primary" th:href="@{/card/update/} + ${card.id}" th:text="#{update}"role="button">[update]</a>
+						  <a sec:authorize="hasRole('ROLE_MODERATOR')" class="col-md-auto btn btn-primary" th:href="@{/card/delete/} + ${card.id}" th:text="#{delete}" role="button">[delete]</a>
 						  <a class="col-md-auto btn btn-primary" th:href="@{/card/} + ${card.id} + @{/sma/add}" th:text="#{card.addSMA}" role="button">[Add Social MediaLink]</a>
 						</div>
 					</div>

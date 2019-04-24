@@ -75,14 +75,14 @@ public class CardController {
 	}
 
 	@GetMapping(value = "/add")
-	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
+	@RolesAllowed({ "ROLE_MODERATOR", "ROLE_USER" })
 	public String addCard(Map<String, Object> model) {
 		model.put("card", new Card());
 		return "card/form";
 	}
 
 	@PostMapping(value = "/save")
-	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
+	@RolesAllowed({ "ROLE_MODERATOR", "ROLE_USER" })
 	public String saveCard(@ModelAttribute("card") Card card,
 			@RequestParam(value = "picturefile", required = false) MultipartFile file) {
 		if (!file.isEmpty()) {
@@ -94,7 +94,7 @@ public class CardController {
 	}
 
 	@GetMapping(value = "/update/{Id}")
-	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
+	@RolesAllowed({ "ROLE_MODERATOR", "ROLE_USER" })
 	public String updateCard(@PathVariable(value = "Id") Long id, Map<String, Object> model) {
 		Optional<Card> card = cardsRepository.findById(id);
 		if (card.isPresent()) {
@@ -105,7 +105,7 @@ public class CardController {
 	}
 
 	@GetMapping(value = "/delete/{Id}")
-	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR" })
+	@RolesAllowed({ "ROLE_MODERATOR" })
 	public String deleteCard(@PathVariable(value = "Id") Long id) {
 		Optional<Card> card = cardsRepository.findById(id);
 		if (card.isPresent()) {

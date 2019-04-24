@@ -28,7 +28,7 @@ public class SocialMediaAccountController {
 	CardsRepository cardsRepository;
 
 	@GetMapping(value = "/add")
-	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
+	@RolesAllowed({ "ROLE_MODERATOR", "ROLE_USER" })
 	public String addSocialMediaAccountMap(@PathVariable(value = "Id") Long id, Map<String, Object> model) {
 		Optional<Card> card = cardsRepository.findById(id);
 		if (card.isPresent()) {
@@ -43,7 +43,7 @@ public class SocialMediaAccountController {
 	}
 
 	@PostMapping(value = "/save")
-	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
+	@RolesAllowed({ "ROLE_MODERATOR", "ROLE_USER" })
 	public String save(@PathVariable("Id") long id, SocialMediaAccount sma) {
 		Optional<Card> card = cardsRepository.findById(id);
 		if (card.isPresent()) {

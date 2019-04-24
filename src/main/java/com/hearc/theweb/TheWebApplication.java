@@ -57,9 +57,6 @@ public class TheWebApplication {
 		System.out.println("init the application");
 
 		// Creation des roles
-		Role role_admin = new Role();
-		role_admin.setName("ROLE_ADMIN");
-		roleRepository.save(role_admin);
 
 		Role role_moderator = new Role();
 		role_moderator.setName("ROLE_MODERATOR");
@@ -68,17 +65,6 @@ public class TheWebApplication {
 		Role role_user = new Role();
 		role_user.setName("ROLE_USER");
 		roleRepository.save(role_user);
-
-		// Creation d'un admin
-		User u_admin = new User();
-		u_admin.setUsername("admin");
-		u_admin.setPassword(bCryptPasswordEncoder.encode("password"));
-
-		Set<Role> roles_admin = new HashSet<>();
-		roles_admin.add(role_admin);
-		u_admin.setRoles(roles_admin);
-
-		userRepository.save(u_admin);
 
 		// Creation d'un moderator
 		User u_moderator = new User();
