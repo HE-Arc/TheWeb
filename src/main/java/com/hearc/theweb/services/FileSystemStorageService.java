@@ -122,23 +122,6 @@ public class FileSystemStorageService implements StorageService {
 			throw new StorageImageNotFoundException("Could not read file: " + filename, e);
 		}
 	}
-
-	@Override
-	public Resource loadCardPictureAsResource(String filename) {
-		try {
-			System.out.println("try to load card picture as resource");
-			System.out.println("loadCardPictureAsResource: " + filename);
-			Path file = this.rootLocation.resolve(filename);
-			Resource resource = new UrlResource(file.toUri());
-			if (resource.exists() || resource.isReadable()) {
-				return resource;
-			} else {
-				throw new StorageImageNotFoundException("Could not find picture of card: " + filename);
-			}
-		} catch (Exception e) {
-			throw new StorageImageNotFoundException("Could not find picture of card: " + filename, e);
-		}
-	}
 	
 	@Override
 	public void deleteCardPicture(long cardId) {

@@ -29,8 +29,6 @@ public interface StorageService {
 
 	Resource loadAsResource(String filename);
 
-	Resource loadCardPictureAsResource(String filename);
-
 	void deleteCardPicture(long cardId);
 	
 	void deleteAll();

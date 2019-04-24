@@ -11,7 +11,6 @@
 		<p>You've been successfully registered ! You can use your account to login.</p>
 		<a th:href="@{/login}" th:text="#{label.form.loginLink}" class="btn btn-primary">login</a>
 	</div>
-	
-	<div th:replace="fragments/base :: footer">[Footer]</div>
 </body>
+<footer th:replace="fragments/base :: footer">[Footer]</footer>
 </html>

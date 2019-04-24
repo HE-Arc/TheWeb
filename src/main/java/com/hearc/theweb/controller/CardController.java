@@ -85,8 +85,10 @@ public class CardController {
 	@RolesAllowed({ "ROLE_ADMIN", "ROLE_MODERATOR", "ROLE_USER" })
 	public String saveCard(@ModelAttribute("card") Card card,
 			@RequestParam(value = "picturefile", required = false) MultipartFile file) {
-		storageService.storeCardPicture(file, card.getId());
-		card.setHasPicture(true);
+		if (!file.isEmpty()) {
+			storageService.storeCardPicture(file, card.getId());
+			card.setHasPicture(true);
+		}
 		cardsRepository.save(card);
 		return "redirect:/card/" + card.getId();
 	}
@@ -125,7 +127,7 @@ public class CardController {
 	@GetMapping(value = "/img/{filename:.+}")
 	@ResponseBody
 	public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
-		Resource file = storageService.loadCardPictureAsResource(filename);
+		Resource file = storageService.loadAsResource(filename);
 
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")

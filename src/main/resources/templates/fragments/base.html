@@ -1,8 +1,6 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!-- **************** head ****************** -->
 <head th:fragment="header">
 <meta charset="UTF-8" />
-
 <!--<link th:href="@{/styles/main.css}" rel="stylesheet">-->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -21,43 +19,45 @@
 	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 	crossorigin="anonymous"></script>
 </head>
-<body>
-	<nav th:fragment="nav"
-		class="navbar navbar-expand-lg navbar-default navbar-light bg-light">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" th:href="@{/}">The Web</a>
-				<button class="navbar-toggler collapsed " type="button"
-					data-toggle="collapse" data-target="#navbarNav"
-					aria-controls="navbarNav" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-			</div>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item active">
-						<a class="nav-link" th:href="@{/card/}">Cards</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/card/add}">Add a card</a>
-					</li>
-					<li th:replace="fragments/fragments.html :: login" ></li>
-					<li th:replace="fragments/fragments.html :: registration" ></li>
-					<li th:replace="fragments/fragments.html :: logout"></li>
-				</ul>
-				<form th:action="@{/}" th:object="${search}" class="form-inline  my-2 my-lg-0">
-					<input name="search" id="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-				</form>
-				
-			</div>
+
+<!-- **************** navbar ****************** -->
+
+<nav th:fragment="nav"
+	class="navbar navbar-expand-lg navbar-default navbar-light bg-light">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" th:href="@{/}" style="color: #288a51;">The Web</a>
+			<button class="navbar-toggler collapsed " type="button"
+				data-toggle="collapse" data-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 		</div>
-	</nav>
-	<footer th:fragment="footer" class="page-footer fixed-bottom">
-		<div class="footer-copyright text-center py-3">
-			<p>Spring Project @ HE-Arc, Neuchâtel
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/card/}">Cards</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/card/add}">Add a card</a>
+				</li>
+				<li th:replace="fragments/fragments.html :: login" ></li>
+				<li th:replace="fragments/fragments.html :: registration" ></li>
+				<li th:replace="fragments/fragments.html :: logout"></li>
+			</ul>
+			<form th:action="@{/}" th:object="${search}" class="form-inline  my-2 my-lg-0">
+				<input name="search" id="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
 		</div>
-	</footer>
-</body>
-</html>
+	</div>
+</nav>
+
+<!-- **************** footer ****************** -->
+
+<footer th:fragment="footer" class="page-footer fixed-bottom" style="height=72px;">
+	<div class="footer-copyright text-center py-3">
+		<p>Spring Project @ HE-Arc, Neuchâtel
+	</div>
+</footer>
