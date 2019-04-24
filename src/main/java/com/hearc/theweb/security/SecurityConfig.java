@@ -38,11 +38,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests() //
 		.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-				.antMatchers("h2/**").permitAll() //
+				.antMatchers("/h2/**").permitAll() //
 				.and().authorizeRequests() //
 				.antMatchers("/").permitAll() //
 				.and().formLogin();
 
 		http.headers().frameOptions().disable();
+		
+		// Uncomment to access h2 console
+		http.csrf().disable();
 	}
 }

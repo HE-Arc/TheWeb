@@ -107,8 +107,17 @@ public class CardController {
 	public String deleteCard(@PathVariable(value = "Id") Long id) {
 		Optional<Card> card = cardsRepository.findById(id);
 		if (card.isPresent()) {
-			cardsRepository.delete(card.get());
-			// TODO suppression de l'image
+			Card cardToDelete = card.get();
+			
+			// Delete all the related SMAs first
+			List<SocialMediaAccount> smas = smaRepository.findByCard(cardToDelete);
+			smas.forEach(smaRepository::delete);
+			
+			// Delete the profil picture
+			storageService.deleteCardPicture(cardToDelete.getId());
+			
+			// Finnaly delete the card
+			cardsRepository.delete(cardToDelete);
 		}
 		return "redirect:/card/";
 	}

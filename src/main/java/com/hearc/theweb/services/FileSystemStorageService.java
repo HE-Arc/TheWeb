@@ -139,6 +139,19 @@ public class FileSystemStorageService implements StorageService {
 			throw new StorageImageNotFoundException("Could not find picture of card: " + filename, e);
 		}
 	}
+	
+	@Override
+	public void deleteCardPicture(long cardId) {
+		try {
+		Path filepath = loadCardPicture(cardId);
+		if (filepath.equals(rootLocation))
+			// No card found
+			return;
+		FileSystemUtils.deleteRecursively(filepath);
+		} catch (Exception e) {
+			System.out.println("An error has occured when deleting card " + cardId + ": " + e);
+		}
+	}
 
 	@Override
 	public void deleteAll() {
