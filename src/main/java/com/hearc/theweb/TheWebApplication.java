@@ -30,6 +30,12 @@ import com.hearc.theweb.services.StorageService;
 public class TheWebApplication {
 
 	@Autowired
+	CardsRepository cardsRepo;
+	
+	@Autowired
+	SocialMediaAccountRepository smaRepo;
+	
+	@Autowired
 	private UserRepository userRepository;
 
 	@Autowired
@@ -42,11 +48,6 @@ public class TheWebApplication {
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
-	@Autowired
-	CardsRepository cardsRepo;
-	@Autowired
-	SocialMediaAccountRepository smaRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(TheWebApplication.class, args);
