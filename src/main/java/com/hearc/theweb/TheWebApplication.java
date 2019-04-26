@@ -31,10 +31,10 @@ public class TheWebApplication {
 
 	@Autowired
 	CardsRepository cardsRepo;
-	
+
 	@Autowired
 	SocialMediaAccountRepository smaRepo;
-	
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -48,7 +48,7 @@ public class TheWebApplication {
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(TheWebApplication.class, args);
 	}
