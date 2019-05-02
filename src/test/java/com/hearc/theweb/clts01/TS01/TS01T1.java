@@ -2,17 +2,11 @@ package com.hearc.theweb.clts01.TS01;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.ArgumentMatchers.isA;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
-import javax.annotation.Resource;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +14,10 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.ContextConfiguration;
@@ -31,9 +28,9 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.hearc.theweb.dto.UserDTO;
 import com.hearc.theweb.models.entites.User;
+import com.hearc.theweb.models.repositories.UserRepository;
 import com.hearc.theweb.properties.StorageProperties;
 import com.hearc.theweb.security.SecurityConfig;
-import com.hearc.theweb.services.StorageService;
 import com.hearc.theweb.services.UserDetailsService_TW;
 import com.hearc.theweb.webconfiguration.WebConfiguration;
 
@@ -45,6 +42,7 @@ import com.hearc.theweb.webconfiguration.WebConfiguration;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { WebConfiguration.class, StorageProperties.class, SecurityConfig.class })
+@SpringBootTest(classes = {UserDetailsService_TW.class, UserRepository.class})
 @WithUserDetails
 public class TS01T1 {
 
@@ -53,7 +51,8 @@ public class TS01T1 {
 	private MockMvc mockMvc;
 
 	@Autowired
-	UserDetailsService_TW userDetailsServiceMock;
+	UserDetailsService  userDetailsServiceMock;
+	// https://www.baeldung.com/java-spring-mockito-mock-mockbean
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -75,7 +74,7 @@ public class TS01T1 {
 		userAdded.setUsername(username);
 		userAdded.setPassword(bCryptPasswordEncoder.encode(password));
 
-		when(userDetailsServiceMock.registerNewUserAccount(isA(UserDTO.class))).thenReturn(userAdded);
+		//when(userDetailsServiceMock.registerNewUserAccount(isA(UserDTO.class))).thenReturn(userAdded);
 
 		// when
 		mockMvc.perform(post("register")//
@@ -88,7 +87,7 @@ public class TS01T1 {
 				.andExpect(redirectedUrl("register"));
 
 		ArgumentCaptor<UserDTO> formObjectArgument = ArgumentCaptor.forClass(UserDTO.class);
-		verify(userDetailsServiceMock, times(1)).registerNewUserAccount(formObjectArgument.capture());
+		//verify(userDetailsServiceMock, times(1)).registerNewUserAccount(formObjectArgument.capture());
 		verifyNoMoreInteractions(userDetailsServiceMock);
 
 		UserDTO formObject = formObjectArgument.getValue();

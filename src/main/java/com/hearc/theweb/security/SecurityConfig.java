@@ -19,7 +19,7 @@ import com.hearc.theweb.services.UserDetailsService_TW;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private UserDetailsService_TW userDetailsService;
+	private UserDetailsService userDetailsService;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
