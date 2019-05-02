@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Visualisation d'une fiche et vérification de la présence d'une photo de profil par défaut.</description>
+   <name>TS05-01</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>66a853e7-a9ef-4f17-abe3-dd2f9b55970d</testCaseGuid>
+</TestCaseEntity>

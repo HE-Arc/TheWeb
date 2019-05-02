@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<TestCaseEntity>
-   <description>Auth with user account</description>
-   <name>TC_Auth_Moderator</name>
-   <tag></tag>
-   <comment></comment>
-   <testCaseGuid>f30418be-d37a-46b6-8e8b-5b6d274952c7</testCaseGuid>
-</TestCaseEntity>

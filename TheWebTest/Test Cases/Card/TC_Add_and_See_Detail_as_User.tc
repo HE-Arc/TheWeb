@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<TestCaseEntity>
-   <description>Auth with user account</description>
-   <name>TC_Add_and_See_Detail_as_User</name>
-   <tag></tag>
-   <comment></comment>
-   <testCaseGuid>48a0168f-f46f-43f6-9e8e-bbfb87171107</testCaseGuid>
-</TestCaseEntity>
